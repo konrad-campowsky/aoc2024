@@ -1,5 +1,4 @@
 import sys
-from collections import defaultdict
 from dataclasses import dataclass
 from parse import parse
 from Vec2 import Vec2
@@ -20,7 +19,6 @@ def parse_line(line):
 #height = 7
 width=101
 height=103
-seconds = 100
 
 robots = tuple(map(parse_line, sys.stdin))
 
@@ -55,7 +53,7 @@ def test_board(second):
     l = ''.join(map(str, line))
     if '1111111' in l:
       print_board(second, board)
-      return
+      return True
 
 
 def print_board(second, board):
@@ -63,17 +61,11 @@ def print_board(second, board):
 
   for line in board:
     print(''.join(map(str, line)).replace('0', '.'))
-  print("*" * width)
-  print()
-  return True
 
 
 for second in range(100000):
-  c = defaultdict(int)
-  line_c = defaultdict(int)
   for robot in robots:
     robot.p = wrap(robot.p + robot.v)
-    c[robot.p] += 1
-    line_c[robot.p.y] += 1
-  test_board(second)
+  if test_board(second):
+    break
 
