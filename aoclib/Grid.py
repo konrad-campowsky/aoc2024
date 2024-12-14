@@ -10,7 +10,7 @@ class Grid:
     self.width = len(grid[0])
 
   def get_tile(self, p):
-    if p.x >= 0 and p.x < self.num_cols and p.y >= 0 and p.y < self.num_rows:
+    if p.x >= 0 and p.x < self.width and p.y >= 0 and p.y < self.height:
       return self.grid[p.y][p.x]
     return None
 
