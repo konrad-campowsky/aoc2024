@@ -48,7 +48,7 @@ def get_price1(region):
 
 def get_price2(region):
   north_sides = 0
-  for y in range(garden.num_rows):
+  for y in range(garden.height):
     plots = [ p for p in region.plots if (p.y == y and garden.get_tile(p + Direction.NORTH) != region.plant) ]
     if plots:
       plots.sort(key=attrgetter("x"))
@@ -58,7 +58,7 @@ def get_price2(region):
           north_sides += 1
 
   south_sides = 0
-  for y in range(garden.num_rows):
+  for y in range(garden.height):
     plots = [ p for p in region.plots if (p.y == y and garden.get_tile(p + Direction.SOUTH) != region.plant) ]
     if plots:
       plots.sort(key=attrgetter("x"))
@@ -68,7 +68,7 @@ def get_price2(region):
           south_sides += 1
 
   east_sides = 0
-  for x in range(garden.num_cols):
+  for x in range(garden.width):
     plots = [ p for p in region.plots if (p.x == x and garden.get_tile(p + Direction.EAST) != region.plant) ]
     if plots:
       plots.sort(key=attrgetter("y"))
@@ -78,7 +78,7 @@ def get_price2(region):
           east_sides += 1
 
   west_sides = 0
-  for x in range(garden.num_cols):
+  for x in range(garden.width):
     plots = [ p for p in region.plots if (p.x == x and garden.get_tile(p + Direction.WEST) != region.plant) ]
     if plots:
       plots.sort(key=attrgetter("y"))

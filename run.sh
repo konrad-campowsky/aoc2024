@@ -7,7 +7,7 @@ if [ -z "${1}" ] || [ -z "${2}" ]; then
 	exit 2
 fi
 
-export PYTHONPATH=`pwd`/lib
+export PYTHONPATH=`pwd`/aoclib
 
 cd `dirname "${1}"`
 
