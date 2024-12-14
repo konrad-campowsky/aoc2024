@@ -13,12 +13,10 @@ for line in sys.stdin:
   lines.append((int(result), operands))
   max_operands = max(max_operands, len(operands))
 
-all_permutations = {n + 1: tuple(product((int.__add__, int.__mul__), repeat=n)) for n in range(1, max_operands)}
 
 s = 0
-
 for result, operands in lines:
-  permutations = all_permutations[len(operands)]
+  permutations = product((int.__add__, int.__mul__), repeat=len(operands) - 1)
   for permutation in permutations:
     first, rest = operands[0], operands[1:]
     for operator, operand in zip(permutation, rest):

@@ -8,21 +8,19 @@ rows = []
 heads = []
 for y, line in enumerate(sys.stdin):
   row = []
-  for c in line.strip():
-    if c == '.':
-      row.append(-1)
-    else:
-      row.append(int(c))
+  for x, c in enumerate(line.strip()):
+    row.append(int(c) if c != '.' else -1)
+    if c == '0':
+      heads.append(Vec2(x, y))
 
   rows.append(row)
-  for x, c in enumerate(row):
-    if c == 0:
-      heads.append(Vec2(x, y))
+
 
 num_cols = len(rows[0])
 num_rows = len(rows)
 
-def test_path(p, height, visited):
+
+def test_path(p, height):
   if height == 9:
     return 1
 
@@ -42,6 +40,6 @@ def test_path(p, height, visited):
 
 s = 0
 for head in heads:
-  s += test_path(head, 0, set())
+  s += test_path(head, 0)
 
 print(s)

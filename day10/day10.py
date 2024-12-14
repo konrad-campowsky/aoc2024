@@ -8,21 +8,17 @@ rows = []
 heads = []
 for y, line in enumerate(sys.stdin):
   row = []
-  for c in line.strip():
-    if c == '.':
-      row.append(-1)
-    else:
-      row.append(int(c))
+  for x, c in enumerate(line.strip()):
+    row.append(int(c) if c != '.' else -1)
+    if c == '0':
+      heads.append(Vec2(x, y))
 
   rows.append(row)
-  for x, c in enumerate(row):
-    if c == 0:
-      heads.append(Vec2(x, y))
+
 
 num_cols = len(rows[0])
 num_rows = len(rows)
 
-#print(rows)
 
 def test_path(p, height, visited):
   if p in visited:
@@ -31,8 +27,6 @@ def test_path(p, height, visited):
 
   if height == 9:
     return 1
-
-#  print("Visiting", p, "at height", height)
 
   s = 0
   for d in Direction.MAIN:
@@ -43,12 +37,11 @@ def test_path(p, height, visited):
 
     h2 = rows[p2.y][p2.x]
 
-#    print ("Testing", p2, "with heights", height, " -> ", h2)
-
     if h2 == height + 1:
       s += test_path(p2, height + 1, visited)
 
   return s
+
 
 s = 0
 for head in heads:

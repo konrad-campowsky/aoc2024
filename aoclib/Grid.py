@@ -20,6 +20,9 @@ class Grid:
   def wrap(self, p):
     return Vec2(x=p.x % self.width, y=p.y % self.height)
 
+  def valid(self, p):
+    return p.x >= 0 and p.x < self.width and p.y >= 0 and p.y < self.height
+
 
 def get_grid(tilemapper=None, container=tuple, lineiterator=None):
   if lineiterator is None:
