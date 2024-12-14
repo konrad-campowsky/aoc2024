@@ -17,7 +17,7 @@ class Grid:
   def __iter__(self):
     return iter(self.grid)
 
-  def wrap(p):
+  def wrap(self, p):
     return Vec2(x=p.x % self.width, y=p.y % self.height)
 
 
