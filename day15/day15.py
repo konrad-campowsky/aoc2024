@@ -15,12 +15,24 @@ moves = {
 }
 
 
-def part1(warehouse):
+def find_robot(warehouse):
   for y, line in enumerate(warehouse):
     for x, c in enumerate(line):
       if c == '@':
-        robot = Vec2(x, y)
-        break
+        return Vec2(x, y)
+
+
+def count(warehouse):
+  s = 0
+  for y, line in enumerate(warehouse):
+    for x, c in enumerate(line):
+      if c in 'O[':
+        s += 100 * y + x
+  print(s)
+
+
+def part1(warehouse):
+  robot = find_robot(warehouse)
 
   def move(p, d):
     c = warehouse.get_tile(p)
@@ -33,28 +45,17 @@ def part1(warehouse):
       return True
     return False
 
-
   for order in orders:
     d = moves[order]
     if move(robot, d):
       warehouse.set_tile(robot, '.')
       robot = robot+d
 
-
-  s = 0
-  for y, line in enumerate(warehouse):
-    for x, c in enumerate(line):
-      if c == 'O':
-        s += 100 * y + x
-  print(s)
+  count(warehouse)
 
 
 def part2(warehouse):
-  for y, line in enumerate(warehouse):
-    for x, c in enumerate(line):
-      if c == '@':
-        robot = Vec2(x, y)
-        break
+  robot = find_robot(warehouse)
 
   def move_h(p, d):
     c = warehouse.get_tile(p)
@@ -129,12 +130,7 @@ def part2(warehouse):
 
 #    print(warehouse.prettyprint())
 
-  s = 0
-  for y, line in enumerate(warehouse):
-    for x, c in enumerate(line):
-      if c == '[':
-        s += 100 * y + x
-  print(s)
+  count(warehouse)
 
 
 def expand(line):
@@ -156,5 +152,3 @@ warehouse2 = get_grid(lambda x: x, container=list, lineiterator=(expand(line) fo
 
 part1(warehouse)
 part2(warehouse2)
-
-
