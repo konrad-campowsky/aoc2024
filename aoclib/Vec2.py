@@ -34,10 +34,10 @@ class Vec2:
 
     times = degrees // 45
     if times > 0:
-      rotations = Direction._ROTATIONS_RIGHT
+      rotations = Direction.ROTATIONS_RIGHT
       d = 1
     else:
-      rotations = Direction._ROTATIONS_LEFT
+      rotations = Direction.ROTATIONS_LEFT
       d = -1
 
     result = self
@@ -61,7 +61,7 @@ class Direction:
   ALL = (NORTH, NORTH_EAST, EAST, SOUTH_EAST, SOUTH, SOUTH_WEST, WEST, NORTH_WEST)
   MAIN = (NORTH, EAST, SOUTH, WEST)
 
-  _ROTATIONS_RIGHT = {
+  ROTATIONS_RIGHT = {
     NORTH: NORTH_EAST,
     NORTH_EAST: EAST,
     EAST: SOUTH_EAST,
@@ -72,7 +72,7 @@ class Direction:
     NORTH_WEST: NORTH
   }
 
-  _ROTATIONS_LEFT = {
+  ROTATIONS_LEFT = {
     NORTH: NORTH_WEST,
     NORTH_EAST: NORTH,
     EAST: NORTH_EAST,
@@ -81,4 +81,18 @@ class Direction:
     SOUTH_WEST: SOUTH,
     WEST: SOUTH_WEST,
     NORTH_WEST: WEST
+  }
+
+  ROTATIONS_MAIN_LEFT = {
+    NORTH: WEST,
+    EAST: NORTH,
+    SOUTH: EAST,
+    WEST: SOUTH
+  }
+
+  ROTATIONS_MAIN_RIGHT = {
+    NORTH: EAST,
+    EAST: SOUTH,
+    SOUTH: WEST,
+    WEST: NORTH
   }

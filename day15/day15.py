@@ -146,9 +146,9 @@ def expand(line):
         yield c
 
 
-warehouse = get_grid(lambda x: x, container=list, lineiterator=takewhile(bool, puzzleinput()))
+warehouse = get_grid(tilemapper=True, container=list, lineiterator=takewhile(bool, puzzleinput()))
 orders = ''.join(puzzleinput())
-warehouse2 = get_grid(lambda x: x, container=list, lineiterator=(expand(line) for line in warehouse))
+warehouse2 = get_grid(tilemapper=True, container=list, lineiterator=(expand(line) for line in warehouse))
 
 part1(warehouse)
 part2(warehouse2)

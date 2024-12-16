@@ -1,11 +1,13 @@
 #! /usr/bin/env python3
 
+from collections.abc import Sequence
 from copy import deepcopy
+
 from aocutil import puzzleinput
 from Vec2 import Vec2
 
 
-class Grid:
+class Grid(Sequence):
   def __init__(self, grid):
     self.grid = grid
     self.height = len(grid)
@@ -16,7 +18,7 @@ class Grid:
 
   def get_tile(self, p):
     if p.x >= 0 and p.x < self.width and p.y >= 0 and p.y < self.height:
-      return self.grid[p.y][p.x]
+      return self[p.y][p.x]
     return None
 
   def set_tile(self, p, c):
@@ -24,6 +26,18 @@ class Grid:
 
   def __iter__(self):
     return iter(self.grid)
+
+  def __getitem__(self, i):
+    return self.grid[i]
+
+  def __len__(self):
+    return len(self.grid)
+
+  def find(self, c):
+    for y, line in enumerate(self):
+      for x, t in enumerate(line):
+        if t == c:
+          return Vec2(x=x, y=y)
 
   def wrap(self, p):
     return Vec2(x=p.x % self.width, y=p.y % self.height)
@@ -43,8 +57,10 @@ def get_grid(tilemapper=None, container=tuple, lineiterator=None):
     lineiterator = puzzleinput()
 
   if tilemapper is not None:
+    if tilemapper is True:
+      tilemapper = lambda x: x
     grid = container(container(map(tilemapper, line)) for line in lineiterator)
   else:
-    grid = container(line for line in lineiterator)
+    grid = container(lineiterator)
 
   return Grid(grid)
