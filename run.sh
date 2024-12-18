@@ -9,6 +9,7 @@ fi
 
 export PYTHONPATH=`pwd`/aoclib
 
+cd `dirname "${0}"`
 cd `dirname "${1}"`
 
 exec python3 `basename "${1}"` < "${2}"

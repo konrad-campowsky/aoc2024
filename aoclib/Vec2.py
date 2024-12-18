@@ -22,6 +22,9 @@ class Vec2:
   def __neg__(self):
     return Vec2(-self.x, -self.y)
 
+  def shortstr(self):
+    return f"{self.x},{self.y}"
+
   def shrunk(self):
     return self // gcd(self.x, self.y)
 
@@ -96,3 +99,8 @@ class Direction:
     SOUTH: WEST,
     WEST: NORTH
   }
+
+
+def parse_vec2(s, separator=','):
+  return Vec2(*map(int, s.strip().split(separator)))
+
