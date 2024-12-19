@@ -1,5 +1,5 @@
 
 def puzzleinput():
 	import sys
-	return map(str.strip, sys.stdin)
+	return (line for line in map(str.strip, sys.stdin) if line)
 
